@@ -50,7 +50,7 @@ public class BaseStationController {
         this.mysqlDb = mysqlDb;
         this.mysqlUser = mysqlUser;
         this.mysqlPassword = mysqlPassword;
-	this.bsr=bsr;
+	    this.bsr=bsr;
 
         DockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
                 .build();
@@ -103,12 +103,12 @@ public class BaseStationController {
             if (!isInNetwork) {
                 throw new RuntimeException("Container failed to join network: " + dockerNetwork);
             }
-	    BaseStation baseStation = new BaseStation();
-	    baseStation.setNodeId(request.getNodeId);
-	    baseStation.setNetworkId(request.getNetworkId);
-	    baseStation.setNetworkName(request.getNetworkName);
-	    baseStation.setStreamingEnabled(request.isStreamingEnabled);
-            BaseStationRepository.save(baseStation)
+            BaseStation baseStation = new BaseStation();
+            baseStation.setNodeId(request.getNodeId());
+            baseStation.setNetworkId(request.getNetworkId());
+            baseStation.setNetworkName(request.getNetworkName());
+            baseStation.setStreamingEnabled(request.isStreamingEnabled());
+            bsr.save(baseStation);
             return "Base Station " + request.getNodeId() + " created and started successfully on network " + dockerNetwork + "!";
         } catch (Exception e) {
             return "Error creating Base Station: " + e.getMessage();
