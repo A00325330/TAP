@@ -14,9 +14,9 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="consumer" options="-parameters" />
-      <module name="container-manager" options="-parameters" />
-      <module name="producer" options="-parameters" />
+      <module name="consumer" options="" />
+      <module name="container-manager" options="" />
+      <module name="producer" options="" />
     </option>
   </component>
 </project>
