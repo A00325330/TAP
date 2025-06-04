@@ -22,7 +22,7 @@ services:
     volumes:
       - kafka-data:/bitnami/kafka/data
     networks:
-      - kafka_default
+      - tap_network  # Use the external tap_network
 
   container-manager:
     build: ./container-manager
@@ -37,7 +37,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
-      - kafka_default
+      - tap_network  # Use the external tap_network
 
   consumer:
     build: ./consumer
@@ -50,12 +50,12 @@ services:
     ports:
       - "8083:8080"
     networks:
-      - kafka_default
-
+      - tap_network  # Use the external tap_network
 
 volumes:
   kafka-data:
 
 networks:
-  kafka_default:
+  tap_network:
+    external: true  # Declare this as an external network
 
