@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   kafka:
     image: bitnami/kafka:latest
@@ -24,21 +26,6 @@ services:
     networks:
       - tap_network  # Use the external tap_network
 
-  container-manager:
-    build: ./container-manager
-    container_name: container-manager
-    depends_on:
-      - kafka
-    ports:
-      - "8081:8080"
-    environment:
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-      SPRING_PROFILES_ACTIVE: prod
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - tap_network  # Use the external tap_network
-
   consumer:
     build: ./consumer
     container_name: consumer
@@ -52,10 +39,10 @@ services:
     networks:
       - tap_network  # Use the external tap_network
 
-volumes:
-  kafka-data:
-
 networks:
   tap_network:
-    external: true  # Declare this as an external network
+    driver: bridge
+
+volumes:
+  kafka-data:
 
